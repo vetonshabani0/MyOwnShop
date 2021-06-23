@@ -11,7 +11,7 @@ namespace MyOwnShop.DataAccess.InMemory
 	public class ProductRepository
 	{
 		ObjectCache cache = MemoryCache.Default;
-		List<Product> products = new List<Product>();
+		List<Product> products = new List<Product>();//ndoshta newlist zduhet!
 		
 		public ProductRepository()
 		{

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyOwnShop.Core.Models;
+using MyOwnShop.Core.ViewModels;
 using MyOwnShop.DataAccess.InMemory;
 
 namespace MyOwnShop.WebUI.Controllers
@@ -11,10 +12,11 @@ namespace MyOwnShop.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         ProductRepository context;
-
+        ProductCategoryRepository productCategories;//So we can load our product categories from the database
         public ProductManagerController()
 		{
             context = new ProductRepository();
+            productCategories = new ProductCategoryRepository();
 		}
         // GET: ProductManager
         public ActionResult Index()
@@ -24,8 +26,11 @@ namespace MyOwnShop.WebUI.Controllers
         }
         public  ActionResult Create()
 		{
-            Product product = new Product();
-            return View(product);
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+            
+            viewModel.Product = new Product();
+            viewModel.ProductCategories = productCategories.Collection();
+            return View(viewModel);
 		}
         [HttpPost]
         public  ActionResult Create(Product product)
@@ -51,7 +56,11 @@ namespace MyOwnShop.WebUI.Controllers
 			}
 			else
 			{
-                return View(product);
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+                viewModel.Product = product;
+                viewModel.ProductCategories = productCategories.Collection();
+
+                return View(viewModel);
 			}
 		}
         [HttpPost]
