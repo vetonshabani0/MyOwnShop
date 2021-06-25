@@ -15,8 +15,8 @@ namespace MyOwnShop.WebUI.Controllers
     {
         IRepository<Product> context;
         IRepository<ProductCategory> productCategories;//So we can load our product categories from the database
-        public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext)
-		{
+       
+        public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext){
             context = productContext;
             productCategories = productCategoryContext;
 		}
